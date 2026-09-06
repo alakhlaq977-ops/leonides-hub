@@ -18,55 +18,55 @@ export const DEFAULT_SETTINGS = {
   bio: "",
 };
 
-function unwrap<T>(res: { data: T | null; error: { message: string } | null }): T {
-  if (res.error) throw new Error(res.error.message);
-  return res.data as T;
+async function run<T>(promise: PromiseLike<{ data: unknown; error: { message: string } | null }>): Promise<T> {
+  const { data, error } = await promise;
+  if (error) throw new Error(error.message);
+  return data as T;
 }
 
 export const settingsQuery = queryOptions({
   queryKey: ["site_settings"],
-  queryFn: async () => unwrap(await supabase.from("site_settings").select("*").maybeSingle()),
+  queryFn: () => run<SiteSettings | null>(supabase.from("site_settings").select("*").maybeSingle()),
 });
 
 export const socialLinksQuery = queryOptions({
   queryKey: ["social_links"],
-  queryFn: async () =>
-    unwrap(await supabase.from("social_links").select("*").order("sort_order")) as SocialLink[],
+  queryFn: () => run<SocialLink[]>(supabase.from("social_links").select("*").order("sort_order")),
 });
 
 export const channelsQuery = queryOptions({
   queryKey: ["youtube_channels"],
-  queryFn: async () =>
-    unwrap(await supabase.from("youtube_channels").select("*").order("sort_order")) as YoutubeChannel[],
+  queryFn: () => run<YoutubeChannel[]>(supabase.from("youtube_channels").select("*").order("sort_order")),
 });
 
 export const videosQuery = queryOptions({
   queryKey: ["videos"],
-  queryFn: async () =>
-    unwrap(
-      await supabase.from("videos").select("*").order("sort_order").order("published_at", { ascending: false }),
-    ) as VideoRow[],
+  queryFn: () =>
+    run<VideoRow[]>(
+      supabase.from("videos").select("*").order("sort_order").order("published_at", { ascending: false }),
+    ),
 });
 
 export const galleryQuery = queryOptions({
   queryKey: ["gallery_images"],
-  queryFn: async () =>
-    unwrap(await supabase.from("gallery_images").select("*").order("sort_order")) as GalleryImage[],
+  queryFn: () => run<GalleryImage[]>(supabase.from("gallery_images").select("*").order("sort_order")),
 });
 
 export const statsQuery = queryOptions({
   queryKey: ["stats"],
-  queryFn: async () => unwrap(await supabase.from("stats").select("*").order("sort_order")) as StatRow[],
+  queryFn: () => run<StatRow[]>(supabase.from("stats").select("*").order("sort_order")),
 });
 
 export const latestContentQuery = queryOptions({
   queryKey: ["latest_content"],
-  queryFn: async () =>
-    unwrap(
-      await supabase.from("latest_content").select("*").order("sort_order").order("published_at", {
-        ascending: false,
-      }),
-    ) as LatestContentRow[],
+  queryFn: () =>
+    run<LatestContentRow[]>(
+      supabase
+        .from("latest_content")
+        .select("*")
+        .order("sort_order")
+        .order("published_at", { ascending: false }),
+    ),
 });
 
 export function findLink(links: SocialLink[] | undefined, platform: string) {
