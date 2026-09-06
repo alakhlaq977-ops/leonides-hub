@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Link2, MessageCircle, Twitch, Twitter, Youtube } from "lucide-react";
+import type { ComponentType } from "react";
 import type { LucideProps } from "lucide-react";
 
 function TikTokIcon(props: LucideProps) {
@@ -25,7 +26,7 @@ function KickIcon(props: LucideProps) {
   );
 }
 
-const ICONS: Record<string, (props: LucideProps) => JSX.Element> = {
+const ICONS: Record<string, ComponentType<LucideProps>> = {
   youtube: Youtube,
   "youtube-shorts": Youtube,
   "youtube-live": Youtube,
