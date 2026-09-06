@@ -155,7 +155,8 @@ function AdminPage() {
 
   const saveSettings = useMutation({
     mutationFn: async (values: Record<string, unknown>) => {
-      const { error } = await supabase.from("site_settings").update(values).eq("id", true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.from("site_settings") as any).update(values).eq("id", true);
       if (error) throw new Error(error.message);
     },
     onSuccess: () => {
