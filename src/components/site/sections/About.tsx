@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Clapperboard, Gamepad2, Laugh, Radio, Sparkles, Trophy } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { settingsQuery } from "@/lib/site-data";
 import { Reveal, SectionHeading } from "../Reveal";
 
