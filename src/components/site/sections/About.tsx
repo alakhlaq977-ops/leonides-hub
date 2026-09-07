@@ -3,6 +3,9 @@ import { Clapperboard, Gamepad2, Laugh, Radio, Sparkles, Trophy } from "lucide-r
 import { settingsQuery } from "@/lib/site-data";
 import { Reveal, SectionHeading } from "../Reveal";
 
+const MARWAN_PORTRAIT =
+  "/__l5e/assets-v1/8826fdc7-fadf-43d1-9a6d-6c0982c2f5dc/marwan-portrait.png";
+
 const TAGS = [
   { icon: Gamepad2, label: "الألعاب" },
   { icon: Clapperboard, label: "الأفلام" },
@@ -22,20 +25,14 @@ export function About() {
 
         <div className="grid items-center gap-10 md:grid-cols-2">
           <Reveal>
-            {settings?.portrait_url ? (
-              <img
-                src={settings.portrait_url}
-                alt="مروان ريحان"
-                loading="lazy"
-                width={640}
-                height={720}
-                className="glass w-full rounded-3xl object-cover p-1"
-              />
-            ) : (
-              <div className="glass grid min-h-64 place-items-center rounded-3xl p-8 text-center text-sm text-muted-foreground">
-                أضف صورة لمروان من لوحة التحكم لتظهر في هذا القسم.
-              </div>
-            )}
+            <img
+              src={settings?.portrait_url ?? MARWAN_PORTRAIT}
+              alt="مروان ريحان"
+              loading="lazy"
+              width={640}
+              height={720}
+              className="glass w-full rounded-3xl object-cover p-1"
+            />
           </Reveal>
 
           <Reveal delay={120}>
