@@ -4,11 +4,30 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { galleryQuery } from "@/lib/site-data";
 import { Reveal, SectionHeading } from "../Reveal";
+import channelAvatar from "@/assets/channel-avatar.jpg";
+import channelBanner from "@/assets/channel-banner.jpg";
+import shortsAvatar from "@/assets/gallery/shorts-avatar.jpg";
+import liveAvatar from "@/assets/gallery/live-avatar.jpg";
+import xProfile from "@/assets/gallery/x-profile.jpg";
+import video1 from "@/assets/gallery/video-1.jpg";
+import video2 from "@/assets/gallery/video-2.jpg";
+import video3 from "@/assets/gallery/video-3.jpg";
+
+const FALLBACK_IMAGES = [
+  { id: "avatar", url: channelAvatar, alt: "مروان ريحان – صورة القناة الرسمية" },
+  { id: "banner", url: channelBanner, alt: "بانر قناة مروان ريحان LeOniDeS" },
+  { id: "shorts", url: shortsAvatar, alt: "قناة مروان ريحان Shorts" },
+  { id: "live", url: liveAvatar, alt: "قناة مروان ريحان للبث المباشر" },
+  { id: "x", url: xProfile, alt: "مروان ريحان على منصة X" },
+  { id: "v1", url: video1, alt: "من فيديوهات مروان ريحان" },
+  { id: "v2", url: video2, alt: "من فيديوهات مروان ريحان" },
+  { id: "v3", url: video3, alt: "من فيديوهات مروان ريحان" },
+];
 
 export function Gallery() {
   const { data, isLoading } = useQuery(galleryQuery);
   const [active, setActive] = useState<{ url: string; alt: string } | null>(null);
-  const images = data ?? [];
+  const images = data && data.length > 0 ? data : FALLBACK_IMAGES;
 
   return (
     <section id="gallery" className="section-pad">
@@ -21,11 +40,8 @@ export function Gallery() {
               <Skeleton key={i} className="aspect-[4/3] rounded-3xl" />
             ))}
           </div>
-        ) : images.length === 0 ? (
-          <div className="glass mx-auto max-w-md rounded-3xl p-8 text-center text-sm text-muted-foreground">
-            لا توجد صور بعد. ارفع صور مروان الرسمية من لوحة التحكم وستظهر هنا مباشرة.
-          </div>
         ) : (
+
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {images.map((image, index) => (
               <Reveal as="li" key={image.id} delay={index * 50}>
