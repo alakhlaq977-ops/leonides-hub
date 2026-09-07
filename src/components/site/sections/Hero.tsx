@@ -3,7 +3,8 @@ import { PlayCircle, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_SETTINGS, findLink, settingsQuery, socialLinksQuery } from "@/lib/site-data";
 import { SocialIcon } from "../SocialIcon";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/channel-banner.jpg";
+import channelAvatar from "@/assets/channel-avatar.jpg";
 
 export function Hero() {
   const { data: settings } = useQuery(settingsQuery);
@@ -72,24 +73,14 @@ export function Hero() {
         </div>
 
         <div className="animate-in fade-in zoom-in-95 duration-700 md:justify-self-end">
-          {settings?.portrait_url ? (
-            <img
-              src={settings.portrait_url}
-              alt="مروان ريحان"
-              width={420}
-              height={520}
-              className="glass mx-auto max-h-[520px] w-full max-w-sm rounded-3xl object-cover p-1"
-            />
-          ) : (
-            <div className="glass mx-auto grid h-72 w-full max-w-sm place-items-center rounded-3xl p-8 text-center">
-              <div>
-                <p className="font-display text-lg font-bold">صورة مروان</p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  ارفع الصورة الشخصية من لوحة التحكم لتظهر هنا مباشرة.
-                </p>
-              </div>
-            </div>
-          )}
+          <img
+            src={settings?.portrait_url ?? channelAvatar}
+            alt="مروان ريحان – LeOniDeS"
+            width={420}
+            height={420}
+            className="glass mx-auto aspect-square w-full max-w-xs rounded-full object-cover p-1 shadow-[var(--shadow-glow)] sm:max-w-sm"
+          />
+
         </div>
       </div>
     </section>
