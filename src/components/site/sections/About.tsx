@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Clapperboard, Gamepad2, Laugh, Radio, Sparkles, Trophy } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { settingsQuery } from "@/lib/site-data";
 import { Reveal, SectionHeading } from "../Reveal";
 
@@ -25,14 +31,32 @@ export function About() {
 
         <div className="grid items-center gap-10 md:grid-cols-2">
           <Reveal>
-            <img
-              src={settings?.portrait_url ?? MARWAN_PORTRAIT}
-              alt="مروان ريحان"
-              loading="lazy"
-              width={640}
-              height={720}
-              className="glass w-full rounded-3xl object-cover p-1"
-            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  aria-label="تكبير صورة مروان ريحان"
+                  className="glass card-hover block w-full overflow-hidden rounded-3xl p-1"
+                >
+                  <img
+                    src={settings?.portrait_url ?? MARWAN_PORTRAIT}
+                    alt="مروان ريحان"
+                    loading="lazy"
+                    width={905}
+                    height={901}
+                    className="aspect-square w-full rounded-[1.35rem] object-cover"
+                  />
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-3xl border-border bg-card p-2">
+                <DialogTitle className="sr-only">صورة مروان ريحان</DialogTitle>
+                <img
+                  src={settings?.portrait_url ?? MARWAN_PORTRAIT}
+                  alt="مروان ريحان"
+                  className="h-auto w-full rounded-xl object-contain"
+                />
+              </DialogContent>
+            </Dialog>
           </Reveal>
 
           <Reveal delay={120}>
