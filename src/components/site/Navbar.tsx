@@ -82,9 +82,6 @@ export function Navbar() {
           >
             {theme === "dark" ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
           </Button>
-          <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <Link to="/admin">لوحة التحكم</Link>
-          </Button>
           <Button
             variant="outline"
             size="icon"
@@ -112,15 +109,6 @@ export function Navbar() {
                 </a>
               </li>
             ))}
-            <li>
-              <Link
-                to="/admin"
-                onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-3 text-base text-primary transition-colors hover:bg-accent"
-              >
-                لوحة التحكم
-              </Link>
-            </li>
           </ul>
         </div>
       ) : null}
