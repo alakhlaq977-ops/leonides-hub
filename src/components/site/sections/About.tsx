@@ -3,6 +3,9 @@ import { Clapperboard, Gamepad2, Laugh, Radio, Sparkles, Trophy } from "lucide-r
 import { settingsQuery } from "@/lib/site-data";
 import { Reveal, SectionHeading } from "../Reveal";
 
+const MARWAN_PORTRAIT =
+  "/__l5e/assets-v1/8826fdc7-fadf-43d1-9a6d-6c0982c2f5dc/marwan-portrait.png";
+
 const TAGS = [
   { icon: Gamepad2, label: "الألعاب" },
   { icon: Clapperboard, label: "الأفلام" },
